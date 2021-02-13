@@ -9,6 +9,6 @@ This repository contains the algorithms of the articles
   Single Image Super-Resolution of Noisy 3D Dental CT Images Using Tucker Decomposition 
   Authors: J. Hatvani, A. Basarab, J. Michetti, M. Gyöngy, D. Kouamé
   
-
-
 For running the codes you will need to download the tensorlab toolbox from https://www.tensorlab.net and add the source codes to the 'tensorlab_2016-03-28' (or latest version) folder.
+
+Links to a sample high- and low-resolution image volume are provided in gt_link.txt and train_link.txt.
