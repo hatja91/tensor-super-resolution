@@ -28,8 +28,9 @@ numIt = 5;
 % rank number
 F = 500;
 
+% folder to tensorlab
 addpath(genpath(''));
-
+% folders to image volumes
 gt_folder = '';
 tr_folder = '';
 
@@ -38,6 +39,7 @@ names = {'11b_', '14_', '17_', '18_', '23_', '27_', '34_', '35_', '36_',...
     '37_', '41_', '43_', '48_'};
 numbers = [ 46, 437; 0, 473; 0, 441; 30, 475; 41, 454; 17, 478; 0, 491;...
     0, 459; 33, 448; 48, 479; 95, 478; 15, 470; 36,  437];
+% this is the uploaded image volume
 imnum = 1;
 % read the image volumes
 for I = numbers(imnum,1):numbers(imnum,2)
