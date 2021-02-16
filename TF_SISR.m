@@ -24,9 +24,10 @@ b_z = 0;
 % is it a simulation?
 simulation = false;
 
-regularization_x = 1e-0;%0;
-regularization_y = 1e-0;%0;
-regularization_z = 1e-0;%0;
+regularization_x = 0;%1e-0;%0;
+regularization_y = 0;%1e-0;%0;
+regularization_z = 0;%1e-0;%0;
+eps = 0.1;
 
 numIt = 10;
 
@@ -239,15 +240,20 @@ else
     Y1 = tens2mat(tr,1);
     Y2 = tens2mat(tr,2);
     Y3 = tens2mat(tr,3);
+    pP1 = tpinv(P1,eps);
+    pP2 = tpinv(P2,eps);
+    pP3 = tpinv(P3,eps);
+    
     for I = 1:numIt
         I
         PCPB = kr(P3*U{3},P2*U{2});
-        U{1} = pinv(P1)*Y1*pinv(PCPB');
+        U{1} = pP1*Y1*tpinv(PCPB',eps);
         PCPA = kr(P3*U{3},P1*U{1});
-        U{2} = pinv(P2)*Y2*pinv(PCPA');
+        U{2} = pP2*Y2*tpinv(PCPA',eps);
         PBPA = kr(P2*U{2},P1*U{1});
-        U{3} = pinv(P3)*Y3*pinv(PBPA');
+        U{3} = pP3*Y3*tpinv(PBPA',eps);
     end
+    
     T = cpdgen(U);
     toc
     slice_x = 150;
@@ -279,6 +285,14 @@ else
     linkaxes(s(3,:),'xy');
     
 end
+
+function B=tpinv(A,eps)
+
+[U,S,V] = svd(A,'econ');
+B = V*(S./(S.^2+eps^2))*U';
+
+end
+
 % 
 % function X = circularing(x,kg,kt,crc_conv,regul)
 % % x is vertical array
